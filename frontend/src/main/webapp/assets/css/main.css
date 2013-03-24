@@ -37,6 +37,10 @@
     height: 200px;
 }
 
+#page-about p {
+    text-align: justify;
+}
+
 .syntaxtree{
     text-align: left;
 }
