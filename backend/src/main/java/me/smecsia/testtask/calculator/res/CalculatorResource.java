@@ -9,6 +9,8 @@ import me.smecsia.testtask.calculator.math.ExpressionBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import static me.smecsia.testtask.calculator.common.util.ExceptionUtil.formatStackTrace;
+
 /**
  * @author Ilya Sadykov
  *         Date: 17.12.12
@@ -27,7 +29,8 @@ public class CalculatorResource extends BasicResource {
             res.setData(new ExpressionEvaluator().evaluate(expression));
             res.setSuccess(true);
         } catch (Exception e) {
-            res.setMessage(e.getMessage());
+            log(e);
+            res.setMessage(formatStackTrace(e));
             res.setSuccess(false);
         }
         return res;

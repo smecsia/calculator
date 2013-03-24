@@ -55,7 +55,7 @@ define(["jquery", "calc/tokens", "calc/lexer"], function ($, tokens, lexer) {
 					return {
 						'Unary': {
 							operator: token.value,
-							expression: expr
+							Expression: expr
 						}
 					};
 				}

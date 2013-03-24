@@ -27,7 +27,7 @@ public class ProxyResourceTest {
         binary.setRight(right);
         binary.setOperator("+");
         expr.setBinary(binary);
-        Result res = proxy.calc(Localhost.BASE_URI.toString(), expr);
+        Result res = proxy.calc(expr);
         assertTrue("Result must be success", res.isSuccess());
         assertEquals("Result value must be 30", 30.0, res.getData());
     }

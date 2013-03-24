@@ -5,6 +5,12 @@
 #expression {
     height: 40px;
 }
+#service-url {
+    height: 40px;
+    width: 200px;
+}
+#calc-button {
+}
 
 .jumbotron.no-margin {
     margin: 0;
@@ -14,7 +20,10 @@
     text-align: center;
 }
 
-#calculator .numbers a.btn, #calculator .operators a.btn {
+.operators, .numbers {
+    margin: 0px;
+}
+#calculator .numbers .btn, #calculator .operators .btn {
     margin: 5px;
     padding: 10px;
     width: 30px;
@@ -23,6 +32,9 @@
 
 #parse-result {
     font-size: 9pt;
+    overflow: auto;
+    width: 300px;
+    height: 200px;
 }
 
 .syntaxtree{

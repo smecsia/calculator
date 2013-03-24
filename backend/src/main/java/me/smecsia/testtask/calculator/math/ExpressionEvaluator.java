@@ -48,6 +48,9 @@ public class ExpressionEvaluator {
         if (expression.getBinary() != null) {
             return evaluate(expression.getBinary());
         }
-        return expression.getNumber();
+        if (expression.getNumber() != null) {
+            return expression.getNumber();
+        }
+        return Double.NaN;
     }
 }
