@@ -3,10 +3,10 @@
 ## Запуск вручную
 
 Чтобы посмотреть проект, нужно запустить несколько частей:
-1. `mvn clean install` - Собираем весь проект целиком.
-2. `cd backend && mvn jetty:run` - Запускаем серверную часть
-3. `cd frontend && mvn jetty:run` - Запускаем клиентскую часть
-4. Открываем в браузере http://localhost:8080
+1. `mvn clean install` - Собираем весь проект целиком.<br/>
+2. `cd backend && mvn jetty:run` - Запускаем серверную часть<br/>
+3. `cd frontend && mvn jetty:run` - Запускаем клиентскую часть<br/>
+4. Открываем в браузере http://localhost:8080<br/>
 5. `cd frontend && mvn test -Pwith-integration-test` - Запускаем тест клиентской части
 
 ## Автозапуск
