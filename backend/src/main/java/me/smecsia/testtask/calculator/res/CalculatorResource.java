@@ -13,8 +13,6 @@ import static me.smecsia.testtask.calculator.common.util.ExceptionUtil.formatSta
 
 /**
  * @author Ilya Sadykov
- *         Date: 17.12.12
- *         Time: 9:53
  */
 @Path("/calc")
 @Produces(MediaType.APPLICATION_XML)
