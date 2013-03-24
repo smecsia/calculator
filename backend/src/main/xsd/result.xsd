@@ -4,11 +4,13 @@
     <xs:element name="Result">
         <xs:complexType>
             <xs:sequence>
+                <xs:element ref="c:Success" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="c:Data" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="c:Message" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="Success" type="xs:boolean"/>
     <xs:element name="Data" type="xs:double"/>
     <xs:element name="Message" type="xs:string"/>
 </xs:schema>

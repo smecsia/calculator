@@ -39,9 +39,38 @@
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.8.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>src/main/xsd</schemaDirectory>
+                    <schemaIncludes>
+                        <include>**/*.xsd</include>
+                    </schemaIncludes>
+                    <generatePackage>me.smecsia.testtask.calculator.backend.to</generatePackage>
+                </configuration>
+            </plugin>
             <!-- JETTY -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -51,6 +80,12 @@
                     <contextPath>/</contextPath>
                     <stopKey>stopBackend</stopKey>
                     <stopPort>9092</stopPort>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
         </plugins>

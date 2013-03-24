@@ -3,45 +3,51 @@
            targetNamespace="http://calculator">
     <xs:element name="Expression">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="c:Binary" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="c:Number" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
+            <xs:choice>
+                <xs:element ref="c:Binary"/>
+                <xs:element ref="c:Number"/>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:element name="Binary">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="1" maxOccurs="1" ref="c:operator"/>
-                <xs:element minOccurs="1" maxOccurs="1" ref="c:left"/>
-                <xs:element minOccurs="1" maxOccurs="1" ref="c:right"/>
-            </xs:sequence>
+            <xs:all>
+                <xs:element ref="c:operator"/>
+                <xs:element ref="c:left"/>
+                <xs:element ref="c:right"/>
+            </xs:all>
         </xs:complexType>
     </xs:element>
 
     <xs:element name="right">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:Unary"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:Number"/>
-            </xs:sequence>
+            <xs:complexContent>
+                <xs:extension base="c:Operand"></xs:extension>
+            </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name="left">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:Unary"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:Number"/>
-            </xs:sequence>
+            <xs:complexContent>
+                <xs:extension base="c:Operand"></xs:extension>
+            </xs:complexContent>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="Operand">
+        <xs:choice>
+            <xs:element ref="c:Expression"/>
+            <xs:element ref="c:Binary"/>
+            <xs:element ref="c:Unary"/>
+            <xs:element ref="c:Number"/>
+        </xs:choice>
+    </xs:complexType>
 
     <xs:element name="Unary">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:operator"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="c:Expression"/>
-            </xs:sequence>
+            <xs:all>
+                <xs:element ref="c:operator"/>
+                <xs:element ref="c:Expression"/>
+            </xs:all>
         </xs:complexType>
     </xs:element>
 

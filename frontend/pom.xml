@@ -18,10 +18,11 @@
             <artifactId>common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!-- COMMON -->
         <dependency>
-            <groupId>org.jvnet.ws.wadl</groupId>
-            <artifactId>wadl-core</artifactId>
-            <version>1.1.4</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
         </dependency>
         <!-- Jersey -->
         <dependency>
@@ -32,26 +33,19 @@
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-bundle</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+        </dependency>
 
+        <!-- TEST -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.jvnet.ws.wadl</groupId>
-                <artifactId>wadl-client-plugin</artifactId>
-                <version>1.1.4</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sourceDirectory>${basedir}/../backend/src/main/wadl</sourceDirectory>
-                    <packageName>me.smecsia.testtask.calculator.frontend</packageName>
-                </configuration>
-            </plugin>
             <!-- BUILD JS -->
             <plugin>
                 <groupId>com.github.mcheely</groupId>
@@ -115,11 +109,62 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.10</version>
                 <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <stopPort>8005</stopPort>
+                    <stopKey>STOP</stopKey>
                     <contextPath>/</contextPath>
-                    <stopKey>stopFrontend</stopKey>
-                    <stopPort>9091</stopPort>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>9090</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+            <!-- SUREFIRE -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>${skip.tests}</skip>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <skip.tests>true</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>with-integration-test</id>
+            <properties>
+                <skip.tests>false</skip.tests>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- FAILSAFE -->
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.6</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-junit47</artifactId>
+                                <version>2.12</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <groups>me.smecsia.testtask.frontend.test.IntegrationTest</groups>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
