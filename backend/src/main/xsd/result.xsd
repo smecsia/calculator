@@ -1,0 +1,14 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:c="http://calcresult" attributeFormDefault="unqualified" elementFormDefault="unqualified"
+           targetNamespace="http://calcresult">
+    <xs:element name="Result">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="c:Data" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="c:Message" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Data" type="xs:double"/>
+    <xs:element name="Message" type="xs:string"/>
+</xs:schema>

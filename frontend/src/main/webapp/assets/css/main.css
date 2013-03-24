@@ -1,0 +1,30 @@
+@import '../bootstrap/css/bootstrap.css';
+@import '../bootstrap/css/bootstrap-responsive.css';
+@import 'bootstrap-customize.css';
+
+#expression {
+    height: 40px;
+}
+
+.jumbotron.no-margin {
+    margin: 0;
+}
+
+#calculator {
+    text-align: center;
+}
+
+#calculator .numbers a.btn, #calculator .operators a.btn {
+    margin: 5px;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+#parse-result {
+    font-size: 9pt;
+}
+
+.syntaxtree{
+    text-align: left;
+}

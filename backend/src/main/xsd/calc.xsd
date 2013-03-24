@@ -1,0 +1,50 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:c="http://calculator" attributeFormDefault="unqualified" elementFormDefault="unqualified"
+           targetNamespace="http://calculator">
+    <xs:element name="Expression">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="c:Binary" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="c:Number" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Binary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="1" ref="c:operator"/>
+                <xs:element minOccurs="1" maxOccurs="1" ref="c:left"/>
+                <xs:element minOccurs="1" maxOccurs="1" ref="c:right"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="right">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:Unary"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:Number"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="left">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:Unary"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:Number"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Unary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:operator"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="c:Expression"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="operator" type="xs:string"/>
+    <xs:element name="Number" type="xs:double"/>
+</xs:schema>
